@@ -1,5 +1,6 @@
 networks:
   gitlab:
+     name: gitlab-local
      driver: bridge
      ipam:
        config:
@@ -29,15 +30,16 @@ services:
         external_url 'http://10.5.0.5'
 
   
-  gitlab-runner:
-    container_name: gitlab-runner
-    image: gitlab/gitlab-runner:latest 
-    restart: always
-    depends_on:
-      - gitlab 
-    networks:
-      gitlab:
-        ipv4_address: 10.5.0.6
-    volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - '$GITLAB_HOME/gitlab-runner/config:/etc/gitlab-runner'
+  # Switching to Local Runner in ubuntu 
+  # gitlab-runner:
+  #   container_name: gitlab-runner
+  #   image: gitlab/gitlab-runner:latest 
+  #   restart: always
+  #   depends_on:
+  #     - gitlab 
+  #   networks:
+  #     gitlab:
+  #       ipv4_address: 10.5.0.6
+  #   volumes:
+  #       - /var/run/docker.sock:/var/run/docker.sock
+  #       - '$GITLAB_HOME/gitlab-runner/config:/etc/gitlab-runner'
